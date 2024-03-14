@@ -1,4 +1,6 @@
+import 'package:blog_app/core/common/widgets/loader.dart';
 import 'package:blog_app/core/theme/lib/core/theme/app_pallete.dart';
+import 'package:blog_app/core/utils/show_snackbar.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_app/features/auth/presentation/pages/login_page.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_field.dart';
@@ -33,28 +35,29 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
-        body: Padding(
-            padding: const EdgeInsets.all(15.0),
-            // child: BlocConsumer<AuthBloc, AuthState>(
-            //   listener: (context, state) {
-            //     if (state is AuthFailure) {
-            //       showSnackBar(context, state.message);
-            //     } else if (state is AuthSuccess) {
-            //       Navigator.pushAndRemoveUntil(
-            //         context,
-            //         BlogPage.route(),
-            //         (route) => false,
-            //       );
-            //     }
-            //   },
-            //   builder: (context, state) {
-            //     if (state is AuthLoading) {
-            //       return const Loader();
-            //     }
-            child: Form(
+      appBar: AppBar(),
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: BlocConsumer<AuthBloc, AuthState>(
+          listener: (context, state) {
+            if (state is AuthFailure) {
+              showSnackBar(context, state.message);
+            } else if (state is AuthSuccess) {
+              // Navigator.pushAndRemoveUntil(
+              //   context,
+              //   BlogPage.route(),
+              //   (route) => false,
+              // );
+            }
+          },
+          builder: (context, state) {
+            if (state is AuthLoading) {
+              return const Loader();
+            }
+            return Form(
               key: formKey,
               child: Column(
+                // 2.54
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
@@ -121,10 +124,10 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ],
               ),
-              //       );
-              //     },
-              //   ),
-              // ),
-            )));
+            );
+          },
+        ),
+      ),
+    );
   }
 }

@@ -57,7 +57,6 @@ class _SignUpPageState extends State<SignUpPage> {
             return Form(
               key: formKey,
               child: Column(
-                // 2.54
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(

@@ -4,6 +4,7 @@ import 'package:blog_app/core/common/cubits/app_user/app_user_cubit.dart';
 import 'package:blog_app/core/common/widgets/loader.dart';
 import 'package:blog_app/core/constants/constants.dart';
 import 'package:blog_app/core/theme/lib/core/theme/app_pallete.dart';
+import 'package:blog_app/core/utils/pick_image.dart';
 import 'package:blog_app/core/utils/show_snackbar.dart';
 import 'package:blog_app/features/blog/presentation/pages/blog_page.dart';
 import 'package:blog_app/features/blog/presentation/widgets/blog_editor.dart';
@@ -29,14 +30,14 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
   List<String> selectedTopics = [];
   File? image;
 
-  // void selectImage() async {
-  //   final pickedImage = await pickImage();
-  //   if (pickedImage != null) {
-  //     setState(() {
-  //       image = pickedImage;
-  //     });
-  //   }
-  // }
+  void selectImage() async {
+    final pickedImage = await pickImage();
+    if (pickedImage != null) {
+      setState(() {
+        image = pickedImage;
+      });
+    }
+  }
 
   // void uploadBlog() {
   //   if (formKey.currentState!.validate() &&
@@ -102,7 +103,7 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
                 children: [
                   image != null
                       ? GestureDetector(
-                          //  onTap: selectImage,
+                          onTap: selectImage,
                           child: SizedBox(
                             width: double.infinity,
                             height: 150,
@@ -117,7 +118,7 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
                         )
                       : GestureDetector(
                           onTap: () {
-                            //   selectImage();
+                            selectImage();
                           },
                           child: DottedBorder(
                             color: AppPallete.borderColor,

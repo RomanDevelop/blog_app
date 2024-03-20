@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // 4.02
+  WidgetsFlutterBinding.ensureInitialized(); // 5.33
   await initDependencies();
   runApp(MultiBlocProvider(
     providers: [

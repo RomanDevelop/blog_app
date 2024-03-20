@@ -1,11 +1,14 @@
+import 'package:blog_app/core/utils/calculate_reading_time.dart';
+import 'package:blog_app/features/blog/domain/entities/blog.dart';
+import 'package:blog_app/features/blog/presentation/pages/blog_viewer_page.dart';
 import 'package:flutter/material.dart';
 
 class BlogCard extends StatelessWidget {
-  // final Blog blog;
+  final Blog blog;
   final Color color;
   const BlogCard({
     super.key,
-    //  required this.blog,
+    required this.blog,
     required this.color,
   });
 
@@ -13,7 +16,7 @@ class BlogCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        //   Navigator.push(context, BlogViewerPage.route(blog));
+        Navigator.push(context, BlogViewerPage.route(blog));
       },
       child: Container(
         height: 200,
@@ -35,19 +38,18 @@ class BlogCard extends StatelessWidget {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                      // children: blog.topics
-                      //     .map(
-                      //       (e) => Padding(
-                      //         padding: const EdgeInsets.all(5.0),
-                      //         child: Chip(label: Text(e)),
-                      //       ),
-                      //     )
-                      //     .toList(),
-                      ),
+                    children: blog.topics
+                        .map(
+                          (e) => Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Chip(label: Text(e)),
+                          ),
+                        )
+                        .toList(),
+                  ),
                 ),
                 Text(
-                  'blog title',
-                  //    blog.title,
+                  blog.title,
                   style: const TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -55,7 +57,7 @@ class BlogCard extends StatelessWidget {
                 ),
               ],
             ),
-            //   Text('${calculateReadingTime(blog.content)} min'),
+            Text('${calculateReadingTime(blog.content)} min'),
           ],
         ),
       ),
